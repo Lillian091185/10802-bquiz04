@@ -47,3 +47,86 @@
       * to(\$path) - 簡化 header("location:xxxxxx") 的使用;
   5. 做好以上工作後，可以先建一張簡單的資料表，把資料庫連線及所有自訂函式功能先測試一次，以確保後續使用不會有問題。
 
+---
+
+## 步驟五：建立資料表及預設資料。
+每個題組依狀況不同，在這一步有不同的做法，視自己對題目的熟悉程度來做應變，可以一次把全部資料表建完，也可以視解題的進度來逐步建立或修改資料表。
+根據題意，題組四會需要用到以下的資料表：
+* admin - 管理員資料表
+* bottom - 頁尾版權資料表
+* goods - 商品資料表
+* member - 會員資料表
+* ord - 訂單資料表
+* type - 分類資料表
+
+1. 依序建立功能需要的六張資料表:
+  * admin
+
+    | name  |  type   |  pk   | default |  A_I  |  note  |
+    | :---: | :-----: | :---: | :-----: | :---: | :----: |
+    |  id   | int(10) |  yes  |         |  yes  | 流水號 |
+    |  acc  |  text   |       |         |       |  帳號  |
+    |  pw   |  text   |       |         |       |  密碼  |
+    |  pr   |  text   |       |         |       |  權限  |
+    
+  * bottom
+
+    |  name  |  type   |  pk   | default |  A_I  |   note   |
+    | :----: | :-----: | :---: | :-----: | :---: | :------: |
+    |   id   | int(10) |  yes  |         |  yes  |  流水號  |
+    | bottom |  text   |       |         |       | 頁尾版權 |
+
+  * goods
+  
+    | name  |  type   |  pk   | default |  A_I  |   note   |
+    | :---: | :-----: | :---: | :-----: | :---: | :------: |
+    |  id   | int(10) |  yes  |         |  yes  |  流水號  |
+    |  no   |  text   |       |         |       | 商品編號 |
+    | name  |  text   |       |         |       | 商品名稱 |
+    | price | int(5)  |       |         |       | 商品單價 |
+    |  qt   | int(5)  |       |         |       |  庫存量  |
+    | spec  |  text   |       |         |       |   規格   |
+    | intro |  text   |       |         |       | 商品簡介 |
+    | file  |  text   |       |         |       | 商品圖片 |
+    | main  | int(5)  |       |         |       |  大分類  |
+    |  sub  | int(5)  |       |         |       |  次分類  |
+    |  sh   | int(2)  |       |    1    |       | 是否上架 |
+
+  * member
+  
+    |  name   |  type   |  pk   |       default       |  A_I  |   note   |
+    | :-----: | :-----: | :---: | :-----------------: | :---: | :------: |
+    |   id    | int(10) |  yes  |                     |  yes  |  流水號  |
+    |   acc   |  text   |       |                     |       |   帳號   |
+    |   pw    |  text   |       |                     |       |   密碼   |
+    |  name   |  text   |       |                     |       |   姓名   |
+    |   tel   |  text   |       |                     |       |   電話   |
+    |  addr   |  text   |       |                     |       |   地址   |
+    |  email  |  text   |       |                     |       | 電子郵件 |
+    | regdate |  date   |       | current_timestamp() |       | 註冊日期 |
+    |  total  | int(10) |       |          0          |       |   總價   |
+
+  * ord
+  
+    |  name   |  type   |  pk   |       default       |  A_I  |   note   |
+    | :-----: | :-----: | :---: | :-----------------: | :---: | :------: |
+    |   id    | int(10) |  yes  |                     |  yes  |  流水號  |
+    |   no    |  text   |       |                     |       |   編號   |
+    |   acc   |  text   |       |                     |       |   帳號   |
+    |  name   |  text   |       |                     |       |   姓名   |
+    |  email  |  text   |       |                     |       |   姓名   |
+    |  addr   |  text   |       |                     |       |   姓名   |
+    |   tel   |  text   |       |                     |       |   姓名   |
+    |  total  | int(10) |       |                     |       |   總價   |
+    |  goods  |  text   |       |                     |       | 商品內容 |
+    | orddate |  text   |       | current_timestamp() |       | 訂購日期 |
+
+  * type
+  
+    |  name  |  type   |  pk   | default |  A_I  |   note   |
+    | :----: | :-----: | :---: | :-----: | :---: | :------: |
+    |   id   | int(10) |  yes  |         |  yes  |  流水號  |
+    |  text  |  text   |       |         |       | 選單名稱 |
+    | parent | int(2)  |       |    0    |       |  大分類  |
+
+2. 為了解題順利，可以把資料表中的一些欄位設為可接受空值的狀況，這樣即使未設定內容，也能正常新增或更改資料，不過這個做法只是為了先求解題完成而做的取巧，實務上應該根據需求及功能來決定欄位是否可以接受空值，並在程式端檢查來源資料是否為空值
