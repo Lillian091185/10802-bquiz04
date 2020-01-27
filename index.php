@@ -34,6 +34,15 @@
             </span>
                     </div>
         <div id="right">
+        <?php
+            $do=(!empty($_GET['do']))?$_GET['do']:"home";
+            $path="./front/" . $do . ".php";
+            if(file_exists($path)){
+                include $path;
+            }else{
+                include "./front/home.php";
+            }
+        ?>
         	        </div>
         <div id="bottom" style="line-height:70px;background:url(icon/bot.png); color:#FFF;" class="ct">
         	頁尾版權 :        </div>
