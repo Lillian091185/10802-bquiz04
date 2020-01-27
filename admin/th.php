@@ -49,6 +49,37 @@ foreach($bigs as $b){
 ?>
 </table>
 <h1 class="ct">商品管理</h1>
+<div class="ct"><button onclick="lof('admin.php?do=add_goods')">新增商品</button></div>
+<table class="all">
+  <tr class="tt">
+    <td class="ct">編號</td>
+    <td class="ct">商品名稱</td>
+    <td class="ct">庫存量</td>
+    <td class="ct">狀態</td>
+    <td class="ct">操作</td>
+  </tr>
+  <?php
+    $goods=all("goods");
+    foreach($goods as $g){
+  ?>
+  <tr class="pp">
+    <td class="ct"><?=$g['no'];?></td>
+    <td><?=$g['name'];?></td>
+    <td class="ct"><?=$g['qt'];?></td>
+    <!--在這個td標籤中加入id屬性來做為改變內容的依據-->
+    <td class="ct" id="sh<?=$g['id'];?>"><?=($g['sh']==1)?"販售中":"已下架";?></td>
+    <td class="ct">
+      <button onclick="lof('admin.php?do=edit_goods&id=<?=$g['id'];?>')">修改</button>
+      <button onclick="del('goods',<?=$g['id'];?>)">刪除</button>
+      <button onclick="shGoods(<?=$g['id'];?>,1)">上架</button>
+      <button onclick="shGoods(<?=$g['id'];?>,0)">下架</button>
+
+    </td>
+  </tr>
+  <?php
+  }
+  ?>
+</table>
 
 <script>
 //建立一個用來編輯分類文字的函式
@@ -67,6 +98,24 @@ function editType(dom,id){
       $(dom).parent("td").prev().html(result)
     })
   }
+}
+
+//建立一個用來上下架商品的函式
+function shGoods(id,sh){
+
+//根據傳入的商品id及顯示與否的值，通知api去更新資料
+$.post("./api/show_goods.php",{id,sh},function(){
+
+  //根據顯示與否來動態更新頁面上的文字內容
+  switch(sh){
+    case 1:
+      $("#sh"+id).html("販售中")
+    break;
+    case 0:
+      $("#sh"+id).html("已下架")
+    break;
+  }
+})
 }
 
 function del(table,id){
