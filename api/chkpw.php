@@ -11,6 +11,17 @@ $pw=$_GET['pw'];
 $chk=nums($table,["acc"=>$acc,"pw"=>$pw]);
 if($chk>=1){
   echo 1;
+
+  //利用table來判斷登入的使用者是一般會員還是管理者，並給予不同的session變數
+  switch($table){
+    case "admin":
+      $_SESSION["admin"]=$acc;
+    break;
+    case "member":
+      $_SESSION["member"]=$acc;
+    break;
+  }  
+
 }else{
   echo 0;
 }
