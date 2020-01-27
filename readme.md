@@ -130,3 +130,83 @@
     | parent | int(2)  |       |    0    |       |  大分類  |
 
 2. 為了解題順利，可以把資料表中的一些欄位設為可接受空值的狀況，這樣即使未設定內容，也能正常新增或更改資料，不過這個做法只是為了先求解題完成而做的取巧，實務上應該根據需求及功能來決定欄位是否可以接受空值，並在程式端檢查來源資料是否為空值
+
+---
+
+## 步驟六：建置首頁標題區及相關頁面內容-最新消息及購物流程。
+項目三提到的內容大多都是後面的功能有做完就會有的，但反過來說，如果後面的相關功能沒完成的話，這邊會再多扣五分，而題組四中有些功能是和資料庫無關的，因此我們會先在這步驟把這些相較之下可以快速完成的功能先做完。
+
+1. 在 `./front/` 中的 `news.php` 中建置最新消息內容，參考項目(六)
+2. 在 index.php  中加入最新消息的兩則跑馬燈消息
+
+```html
+<marquee>
+    情人節特惠活動 &nbsp; 年終特賣會開跑了  
+</marquee>
+```
+
+3. 最新消息的描述中，並沒有提到點擊標題後顯示詳細內容，再加上後台也沒有最新消息管理的功能，因此這邊我們只先做到顯示兩則消息的標題即可，後續功能做完再回頭來補，而詳細內容的功能，我建議是使用jQuery的hide()和show()來做切換顯示即可，參考以下寫法：
+
+```html
+
+<table class="all" id="n0">
+    <tr class="tt">
+        <td>標題</td>
+    </tr>
+    <tr class="pp">
+        <td onclick="javascript:$('.all').hide();$('#n1').show()">
+            年終特賣會開跑了
+        </td>
+    </tr>
+    <tr class="pp">
+        <td onclick="javascript:$('.all').hide();$('#n2').show()">
+            情人節特惠活動
+        </td>
+    </tr>
+</table>
+
+<table class="all" id="n1" style="display:none">
+    <tr>
+        <td class="tt">標題</td>
+        <td class="pp">
+            年終特賣會開跑了
+        </td>
+    </tr>
+    <tr>
+        <td class="tt">內容</td>
+        <td class="pp">
+            即日期至年底，凡會員購物滿仟送佰，買越多送越多~
+        </td>
+    </tr>
+    <tr class="ct">
+        <td colspan="2">
+            <button onclick="javascript:location.href='index.php?do=news'">
+                返回
+            </button>
+        </td>
+    </tr>
+</table>
+<table class="all" id="n2" style="display:none">
+    <tr>
+        <td class="tt">標題</td>
+        <td class="pp">
+            情人節特惠活動
+        </td>
+    </tr>
+    <tr>
+        <td class="tt">內容</td>
+        <td class="pp">
+            為了慶祝七夕情人節，將舉辦情人兩人到現場有七七折之特惠活動~
+        </td>
+    </tr>
+    <tr class="ct">
+        <td colspan="2">
+            <button onclick="javascript:location.href='index.php?do=news'">
+                返回
+            </button>
+        </td>
+    </tr>
+</table>
+
+```
+4. 在 `./front/` 中的 `look.php` 中加入購物流程圖片
