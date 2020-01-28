@@ -29,6 +29,36 @@
                 </marquee></div>
         <div id="left" class="ct">
         	<div style="min-height:400px;">
+                      <!--選單-->
+                      <div class="ww">
+              <!--第一個全部商品的連結只要加上全部可顯示的商品數量即可-->
+              <a href="index.php">全部商品(<?=nums("goods",["sh"=>1]);?>)</a>
+            </div>
+            <?php
+              //取出全部的大分類資料並印出需要的內容
+              $ma=all("type",["parent"=>0]);
+              foreach($ma as $m){
+            ?>
+              <div class="ww">
+                <!--在計算數量時，要小心條件的設定除了大分類的id 還要加上是否上架的設定-->
+                <a href="index.php?m=<?=$m['id'];?>"><?=$m['text'];?>(<?=nums("goods",["main"=>$m['id'],"sh"=>1]);?>)</a>
+                <?php
+                  //判斷是否有中分類，有的話才顯示中分類，否則不顯示
+                  $chk=nums("type",['parent'=>$m['id']]);
+                  if($chk>=1){
+                    echo "<div class='s'>";
+                    $sub=all("type",['parent'=>$m['id']]);
+                    foreach($sub as $s){
+                      echo "<a href='index.php?m=".$m['id']."&s=".$s['id']."'>".$s['text']."</a>";
+                    }
+                    echo "</div>";
+                  }
+                ?>
+              </div>
+            <?php
+              }
+
+            ?>
         	            </div>
                         <span>
             	<div>進站總人數</div>

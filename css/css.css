@@ -22,9 +22,10 @@ body
 	display:inline-block;
 	width:20%;
 	padding:2%;
-	min-height:550px;
+	height:550px;
 	vertical-align:top;
-	border:#000 1px solid;
+  border:#000 1px solid;
+  overflow:auto;
 }
 #left a
 {
@@ -110,4 +111,10 @@ div.ww:hover > div.s
 .sb button
 {
 	font-size:12px;
+}
+
+/*指定詳細的中分類樣式，並指定其中的選單背景為淺綠色*/
+#left div.ww:hover > div.s a
+{
+  background:lightgreen;
 }
