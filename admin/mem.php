@@ -3,7 +3,7 @@
 $rows=all("member");
 
 ?>
-
+<h1 class="ct">會員管理</h1>
 <table class="all">
   <tr class="tt">
     <td class="ct">姓名</td>

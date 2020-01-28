@@ -371,3 +371,11 @@ echo "<a href='index.php?m=".$m['id']."&s=".$s['id']."' style='background:lightg
 5. 最後的補強是在首頁的功能連結上，針對會員登入的連結加入判斷，如果會員登入成功，則會員登入改成登出。
 6. 在 `./api/logout.php` 中撰寫登出功能，這邊我們為了兼容前台會員登出及後台的管理者登出，因此使用switch..case的方式來分辨要登出的對像，如果是管理者登出，則只要清楚管理者的session，如果是會員登出，則除了清楚會員的session，也會一併清楚會員的購物車session。
 7. 在 `index.php` 中的會員登出連結上加入 `logout=member` 的參數，同時也可以順手在 `admin.php` 的登出功能上加入 `logout=admin` 參數。
+
+---
+
+## 步驟十七：後台訂單功能製作-訂單詳細內容
+後台訂單功能的內容其實都是前面做過的功能的組合，因此如果能做到這邊來，基本上這題組就十拿九穩了。
+
+1. 複製 `./front/billing.php` 的內容到 `./admin/order_detail.php`
+2. 在 `./admin/order_detail.php` 中撰寫訂單詳細資料的內容，將原本的輸入欄位拿掉即可。
