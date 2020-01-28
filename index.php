@@ -21,8 +21,15 @@
                 <a href="?do=news">最新消息</a> |
                 <a href="?do=look">購物流程</a> |
                 <a href="?do=buycart">購物車</a> |
-                                <a href="?do=login">會員登入</a> |
-                                <a href="?do=admin">管理登入</a>
+                <?php
+                //依據登入狀況來判斷要顯示的連結內容
+                if(!empty($_SESSION['member'])){
+                  echo "<a href='./api/logout.php?logout=member'>登出</a>";
+                }else{
+                  echo "<a href='?do=login'>會員登入</a>";
+                }
+                ?> |
+                <a href="?do=admin">管理登入</a>
            </div>
            <marquee>
                     情人節特惠活動 &nbsp; 年終特賣會開跑了  

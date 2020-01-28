@@ -39,7 +39,7 @@ $prs=unserialize($ad['pr']);
             	          <?=(in_array(3,$prs))?"<a href='?do=mem'>會員管理</a>":"";?>  	
             	          <?=(in_array(4,$prs))?"<a href='?do=bot'>頁尾版權管理</a>":"";?>  	
             	          <?=(in_array(5,$prs))?"<a href='?do=news'>最新消息管理</a>":"";?>  	
-            	        	<a href="?do=logout" style="color:#f00;">登出</a>
+            	        	<a href="./api/logout.php?logout=admin" style="color:#f00;">登出</a>
                     </div>
                     </div>
         <div id="right">
